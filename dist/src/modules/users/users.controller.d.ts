@@ -6,20 +6,20 @@ export declare class UsersController {
     private readonly usersService;
     constructor(usersService: UsersService);
     create(createUserDto: CreateUserDto): Promise<{
+        id: string;
         email: string;
         firstName: string | null;
         lastName: string | null;
-        id: string;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
     }>;
     findAll(paginationDto: PaginationDto): Promise<{
         data: {
+            id: string;
             email: string;
             firstName: string | null;
             lastName: string | null;
-            id: string;
             isActive: boolean;
             createdAt: Date;
             updatedAt: Date;
@@ -32,19 +32,19 @@ export declare class UsersController {
         };
     }>;
     findOne(id: string): Promise<{
+        id: string;
         email: string;
         firstName: string | null;
         lastName: string | null;
-        id: string;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
     }>;
     update(id: string, updateUserDto: UpdateUserDto): Promise<{
+        id: string;
         email: string;
         firstName: string | null;
         lastName: string | null;
-        id: string;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;

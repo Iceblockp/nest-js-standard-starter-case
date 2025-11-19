@@ -31,6 +31,25 @@
 $ npm install
 ```
 
+## Database setup
+
+```bash
+# Run database migrations
+$ npx prisma migrate dev
+
+# Seed the database with sample data
+$ npm run seed
+```
+
+The seed script will create the following sample users (all with password `Password123!`):
+
+- `admin@example.com` - Admin User (active)
+- `john.doe@example.com` - John Doe (active)
+- `jane.smith@example.com` - Jane Smith (active)
+- `inactive@example.com` - Inactive User (inactive)
+
+You can use these credentials to test authentication and user management features.
+
 ## Compile and run the project
 
 ```bash

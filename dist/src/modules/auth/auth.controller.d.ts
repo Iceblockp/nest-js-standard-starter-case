@@ -6,10 +6,10 @@ export declare class AuthController {
     constructor(authService: AuthService);
     register(registerDto: RegisterDto): Promise<{
         user: {
+            id: string;
             email: string;
             firstName: string | null;
             lastName: string | null;
-            id: string;
             isActive: boolean;
             createdAt: Date;
             updatedAt: Date;
