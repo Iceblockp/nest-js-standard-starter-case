@@ -96,7 +96,7 @@
   - Document how to run seed script
   - _Requirements: 11.1_
 
-- [ ] 12. Write integration tests
+- [x] 12. Write integration tests
   - Set up test database configuration
   - Write tests for authentication flow (register, login, protected routes)
   - Write tests for users CRUD operations

@@ -69,12 +69,28 @@ $ npm run start:prod
 # unit tests
 $ npm run test
 
-# e2e tests
+# e2e tests (automatically sets up test database)
 $ npm run test:e2e
 
 # test coverage
 $ npm run test:cov
 ```
+
+### Test Database Setup
+
+The integration tests use a separate test database to avoid affecting your development data. The test database is configured in `.env.test` and uses the database name `nestjs_starter_test`.
+
+Before running tests for the first time, ensure:
+
+1. PostgreSQL is running
+2. The test database exists (or Prisma will create it)
+3. Run `npm run test:e2e` which automatically runs migrations on the test database
+
+The tests will:
+
+- Automatically apply database migrations before running
+- Clean up test data after each test suite
+- Use isolated transactions where possible
 
 ## Deployment
 
