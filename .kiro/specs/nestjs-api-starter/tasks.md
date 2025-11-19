@@ -20,7 +20,7 @@
   - Set up environment validation schema using class-validator
   - _Requirements: 2.1, 2.2, 2.3, 2.4, 2.5_
 
-- [ ] 3. Set up Prisma and database connection
+- [x] 3. Set up Prisma and database connection
   - Initialize Prisma with PostgreSQL provider
   - Create Prisma schema with User model
   - Create PrismaModule as a global module

@@ -50,6 +50,9 @@ let AppConfigService = class AppConfigService {
     get isTest() {
         return this.nodeEnv === 'test';
     }
+    get(key) {
+        return this.configService.get(key);
+    }
 };
 exports.AppConfigService = AppConfigService;
 exports.AppConfigService = AppConfigService = __decorate([

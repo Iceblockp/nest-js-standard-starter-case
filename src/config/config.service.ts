@@ -48,4 +48,8 @@ export class AppConfigService {
   get isTest(): boolean {
     return this.nodeEnv === 'test';
   }
+
+  get(key: string): string | undefined {
+    return this.configService.get<string>(key);
+  }
 }
