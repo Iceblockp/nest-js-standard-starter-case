@@ -14,13 +14,14 @@ const app_service_1 = require("./app.service");
 const config_module_1 = require("./config/config.module");
 const prisma_module_1 = require("./modules/prisma/prisma.module");
 const auth_module_1 = require("./modules/auth/auth.module");
+const users_module_1 = require("./modules/users/users.module");
 const jwt_auth_guard_1 = require("./common/guards/jwt-auth.guard");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [config_module_1.ConfigModule, prisma_module_1.PrismaModule, auth_module_1.AuthModule],
+        imports: [config_module_1.ConfigModule, prisma_module_1.PrismaModule, auth_module_1.AuthModule, users_module_1.UsersModule],
         controllers: [app_controller_1.AppController],
         providers: [
             app_service_1.AppService,

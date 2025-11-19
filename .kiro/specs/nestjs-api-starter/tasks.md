@@ -48,7 +48,7 @@
   - Create LoginDto and RegisterDto with validation
   - _Requirements: 4.1, 4.2, 4.3, 4.4, 4.5_
 
-- [ ] 6. Implement users CRUD module
+- [x] 6. Implement users CRUD module
   - Create UsersModule
   - Implement UsersService with Prisma Client operations
   - Create CreateUserDto with validation decorators
