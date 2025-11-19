@@ -12,12 +12,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PaginationDto = void 0;
 const class_validator_1 = require("class-validator");
 const class_transformer_1 = require("class-transformer");
+const swagger_1 = require("@nestjs/swagger");
 class PaginationDto {
     page = 1;
     limit = 10;
 }
 exports.PaginationDto = PaginationDto;
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Page number',
+        example: 1,
+        minimum: 1,
+        default: 1,
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_transformer_1.Type)(() => Number),
     (0, class_validator_1.IsInt)(),
@@ -25,6 +33,14 @@ __decorate([
     __metadata("design:type", Number)
 ], PaginationDto.prototype, "page", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        description: 'Number of items per page',
+        example: 10,
+        minimum: 1,
+        maximum: 100,
+        default: 10,
+        required: false,
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_transformer_1.Type)(() => Number),
     (0, class_validator_1.IsInt)(),

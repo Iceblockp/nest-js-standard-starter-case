@@ -45,7 +45,21 @@ exports.UsersController = UsersController;
 __decorate([
     (0, common_1.Post)(),
     (0, swagger_1.ApiOperation)({ summary: 'Create a new user' }),
-    (0, swagger_1.ApiResponse)({ status: 201, description: 'User created successfully' }),
+    (0, swagger_1.ApiResponse)({
+        status: 201,
+        description: 'User created successfully',
+        schema: {
+            example: {
+                id: '123e4567-e89b-12d3-a456-426614174000',
+                email: 'user@example.com',
+                firstName: 'John',
+                lastName: 'Doe',
+                isActive: true,
+                createdAt: '2025-11-19T10:30:00.000Z',
+                updatedAt: '2025-11-19T10:30:00.000Z',
+            },
+        },
+    }),
     (0, swagger_1.ApiResponse)({ status: 400, description: 'Invalid input data' }),
     (0, swagger_1.ApiResponse)({ status: 409, description: 'Email already exists' }),
     __param(0, (0, common_1.Body)()),
@@ -56,7 +70,40 @@ __decorate([
 __decorate([
     (0, common_1.Get)(),
     (0, swagger_1.ApiOperation)({ summary: 'Get all users with pagination' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Users retrieved successfully' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Users retrieved successfully',
+        schema: {
+            example: {
+                data: [
+                    {
+                        id: '123e4567-e89b-12d3-a456-426614174000',
+                        email: 'user1@example.com',
+                        firstName: 'John',
+                        lastName: 'Doe',
+                        isActive: true,
+                        createdAt: '2025-11-19T10:30:00.000Z',
+                        updatedAt: '2025-11-19T10:30:00.000Z',
+                    },
+                    {
+                        id: '223e4567-e89b-12d3-a456-426614174001',
+                        email: 'user2@example.com',
+                        firstName: 'Jane',
+                        lastName: 'Smith',
+                        isActive: true,
+                        createdAt: '2025-11-19T10:31:00.000Z',
+                        updatedAt: '2025-11-19T10:31:00.000Z',
+                    },
+                ],
+                meta: {
+                    total: 50,
+                    page: 1,
+                    limit: 10,
+                    totalPages: 5,
+                },
+            },
+        },
+    }),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [pagination_dto_1.PaginationDto]),
@@ -65,7 +112,21 @@ __decorate([
 __decorate([
     (0, common_1.Get)(':id'),
     (0, swagger_1.ApiOperation)({ summary: 'Get a user by ID' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'User retrieved successfully' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'User retrieved successfully',
+        schema: {
+            example: {
+                id: '123e4567-e89b-12d3-a456-426614174000',
+                email: 'user@example.com',
+                firstName: 'John',
+                lastName: 'Doe',
+                isActive: true,
+                createdAt: '2025-11-19T10:30:00.000Z',
+                updatedAt: '2025-11-19T10:30:00.000Z',
+            },
+        },
+    }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'User not found' }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -75,7 +136,21 @@ __decorate([
 __decorate([
     (0, common_1.Patch)(':id'),
     (0, swagger_1.ApiOperation)({ summary: 'Update a user' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'User updated successfully' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'User updated successfully',
+        schema: {
+            example: {
+                id: '123e4567-e89b-12d3-a456-426614174000',
+                email: 'updated@example.com',
+                firstName: 'John',
+                lastName: 'Doe',
+                isActive: true,
+                createdAt: '2025-11-19T10:30:00.000Z',
+                updatedAt: '2025-11-19T10:35:00.000Z',
+            },
+        },
+    }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'User not found' }),
     (0, swagger_1.ApiResponse)({ status: 409, description: 'Email already exists' }),
     __param(0, (0, common_1.Param)('id')),
@@ -87,7 +162,21 @@ __decorate([
 __decorate([
     (0, common_1.Delete)(':id'),
     (0, swagger_1.ApiOperation)({ summary: 'Delete a user' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'User deleted successfully' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'User deleted successfully',
+        schema: {
+            example: {
+                id: '123e4567-e89b-12d3-a456-426614174000',
+                email: 'user@example.com',
+                firstName: 'John',
+                lastName: 'Doe',
+                isActive: true,
+                createdAt: '2025-11-19T10:30:00.000Z',
+                updatedAt: '2025-11-19T10:30:00.000Z',
+            },
+        },
+    }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'User not found' }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -96,7 +185,7 @@ __decorate([
 ], UsersController.prototype, "remove", null);
 exports.UsersController = UsersController = __decorate([
     (0, swagger_1.ApiTags)('users'),
-    (0, swagger_1.ApiBearerAuth)(),
+    (0, swagger_1.ApiBearerAuth)('JWT'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Controller)('users'),
     __metadata("design:paramtypes", [users_service_1.UsersService])

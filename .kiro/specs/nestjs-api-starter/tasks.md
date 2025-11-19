@@ -67,7 +67,7 @@
   - Include individual check results in response
   - _Requirements: 9.1, 9.2, 9.3, 9.4, 9.5_
 
-- [ ] 8. Set up Swagger API documentation
+- [x] 8. Set up Swagger API documentation
   - Configure Swagger in main.ts
   - Add API tags to controllers
   - Add ApiProperty decorators to DTOs

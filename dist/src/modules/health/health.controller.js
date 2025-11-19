@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.HealthController = void 0;
 const common_1 = require("@nestjs/common");
 const terminus_1 = require("@nestjs/terminus");
+const swagger_1 = require("@nestjs/swagger");
 const prisma_service_1 = require("../prisma/prisma.service");
 const public_decorator_1 = require("../../common/decorators/public.decorator");
 let HealthController = class HealthController {
@@ -49,11 +50,47 @@ __decorate([
     (0, common_1.Get)(),
     (0, public_decorator_1.Public)(),
     (0, terminus_1.HealthCheck)(),
+    (0, swagger_1.ApiOperation)({ summary: 'Check application health status' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Application is healthy',
+        schema: {
+            example: {
+                status: 'ok',
+                info: {
+                    database: {
+                        status: 'up',
+                    },
+                },
+                details: {
+                    database: {
+                        status: 'up',
+                    },
+                },
+            },
+        },
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 503,
+        description: 'Application is unhealthy',
+        schema: {
+            example: {
+                status: 'error',
+                error: {
+                    database: {
+                        status: 'down',
+                        message: 'Connection failed',
+                    },
+                },
+            },
+        },
+    }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], HealthController.prototype, "check", null);
 exports.HealthController = HealthController = __decorate([
+    (0, swagger_1.ApiTags)('health'),
     (0, common_1.Controller)('health'),
     __metadata("design:paramtypes", [terminus_1.HealthCheckService,
         prisma_service_1.PrismaService])
