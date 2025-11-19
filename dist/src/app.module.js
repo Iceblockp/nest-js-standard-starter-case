@@ -9,9 +9,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const core_1 = require("@nestjs/core");
+const throttler_1 = require("@nestjs/throttler");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const config_module_1 = require("./config/config.module");
+const config_service_1 = require("./config/config.service");
 const prisma_module_1 = require("./modules/prisma/prisma.module");
 const auth_module_1 = require("./modules/auth/auth.module");
 const users_module_1 = require("./modules/users/users.module");
@@ -22,13 +24,33 @@ let AppModule = class AppModule {
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [config_module_1.ConfigModule, prisma_module_1.PrismaModule, auth_module_1.AuthModule, users_module_1.UsersModule, health_module_1.HealthModule],
+        imports: [
+            config_module_1.ConfigModule,
+            throttler_1.ThrottlerModule.forRootAsync({
+                imports: [config_module_1.ConfigModule],
+                inject: [config_service_1.AppConfigService],
+                useFactory: (configService) => [
+                    {
+                        ttl: configService.rateLimitTtl * 1000,
+                        limit: configService.rateLimitMax,
+                    },
+                ],
+            }),
+            prisma_module_1.PrismaModule,
+            auth_module_1.AuthModule,
+            users_module_1.UsersModule,
+            health_module_1.HealthModule,
+        ],
         controllers: [app_controller_1.AppController],
         providers: [
             app_service_1.AppService,
             {
                 provide: core_1.APP_GUARD,
                 useClass: jwt_auth_guard_1.JwtAuthGuard,
+            },
+            {
+                provide: core_1.APP_GUARD,
+                useClass: throttler_1.ThrottlerGuard,
             },
         ],
     })

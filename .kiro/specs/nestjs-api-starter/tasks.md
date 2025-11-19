@@ -76,7 +76,7 @@
   - Configure Swagger UI at /api/docs
   - _Requirements: 8.1, 8.2, 8.3, 8.4, 8.5_
 
-- [ ] 9. Implement rate limiting (optional feature)
+- [x] 9. Implement rate limiting (optional feature)
   - Configure ThrottlerModule with environment-based settings
   - Apply ThrottlerGuard globally
   - Add rate limit configuration to ConfigService
