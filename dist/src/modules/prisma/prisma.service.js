@@ -13,12 +13,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PrismaService = void 0;
 const common_1 = require("@nestjs/common");
 const client_1 = require("@prisma/client");
+const adapter_pg_1 = require("@prisma/adapter-pg");
+const pg_1 = require("pg");
+const config_service_1 = require("../../config/config.service");
 let PrismaService = PrismaService_1 = class PrismaService extends client_1.PrismaClient {
+    configService;
     logger = new common_1.Logger(PrismaService_1.name);
-    constructor() {
+    pool;
+    constructor(configService) {
+        const pool = new pg_1.Pool({
+            connectionString: configService.databaseUrl,
+        });
+        const adapter = new adapter_pg_1.PrismaPg(pool);
         super({
+            adapter,
             log: ['error', 'warn'],
         });
+        this.configService = configService;
+        this.pool = pool;
     }
     async onModuleInit() {
         try {
@@ -33,6 +45,7 @@ let PrismaService = PrismaService_1 = class PrismaService extends client_1.Prism
     async onModuleDestroy() {
         try {
             await this.$disconnect();
+            await this.pool.end();
             this.logger.log('Successfully disconnected from database');
         }
         catch (error) {
@@ -48,6 +61,6 @@ let PrismaService = PrismaService_1 = class PrismaService extends client_1.Prism
 exports.PrismaService = PrismaService;
 exports.PrismaService = PrismaService = PrismaService_1 = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [config_service_1.AppConfigService])
 ], PrismaService);
 //# sourceMappingURL=prisma.service.js.map
